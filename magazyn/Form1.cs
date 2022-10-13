@@ -38,8 +38,11 @@ namespace magazyn
 
         private void tbPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //TODO sprawdzanie czy . jest na koncu lub poczatku
 
+            if (tbPrice.Text.Length == 8 && e.KeyChar == ',' || tbPrice.Text.Length==0&& e.KeyChar == ',')
+            {
+                e.Handled = true;
+            }
             if (e.KeyChar == ',' && (sender as TextBox).Text.IndexOf(',') > -1)
             {
                 e.Handled = true;

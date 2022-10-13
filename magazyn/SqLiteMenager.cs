@@ -15,6 +15,7 @@ namespace magazyn
 {
     internal class SqLiteMenager
     {
+        //sciezka pliku bazy danych
         string path = @"URI=file:" + Application.StartupPath + "\\SuppliesDB.db";
         SQLiteDataReader dataReader;
         public void WriteDB(string name, string description, string category, int amount, double price)
@@ -76,7 +77,7 @@ namespace magazyn
         }
         public void DeleteFromDB(string id)
         {
-            //TODO dodac funkcjonalnosc
+            
             var con = new SQLiteConnection(path);
             con.Open();
             var cmd = new SQLiteCommand(con);
@@ -94,7 +95,7 @@ namespace magazyn
         }
         public void EditFromDB(string name, string description, string category, int amount, double price,string id)
         {
-            //TODO dodac funkcjonalnosc
+            
             var con = new SQLiteConnection(path);
             con.Open();
             var cmd = new SQLiteCommand(con);
@@ -113,4 +114,3 @@ namespace magazyn
 
     }
 }
-//UPDATE table_name SET column1 = value1, column2 = value2, ...WHERE condition;

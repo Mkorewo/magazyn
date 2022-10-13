@@ -117,6 +117,7 @@
             // tbAmount
             // 
             this.tbAmount.Location = new System.Drawing.Point(123, 207);
+            this.tbAmount.MaxLength = 7;
             this.tbAmount.Name = "tbAmount";
             this.tbAmount.Size = new System.Drawing.Size(125, 27);
             this.tbAmount.TabIndex = 8;
@@ -125,6 +126,7 @@
             // tbPrice
             // 
             this.tbPrice.Location = new System.Drawing.Point(123, 240);
+            this.tbPrice.MaxLength = 9;
             this.tbPrice.Name = "tbPrice";
             this.tbPrice.Size = new System.Drawing.Size(125, 27);
             this.tbPrice.TabIndex = 9;
