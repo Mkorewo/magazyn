@@ -15,10 +15,9 @@ namespace magazyn
 {
     internal class SqLiteMenager
     {
-        //sciezka pliku bazy danych
-        string path = @"URI=file:" + Application.StartupPath + "\\SuppliesDB.db";
+        string path = @"URI=file:" + Application.StartupPath + "\\SuppliesDB.db"; //sciezka pliku bazy danych
         SQLiteDataReader dataReader;
-        public void WriteDB(string name, string description, string category, int amount, double price)
+        public void WriteDB(string name, string description, string category, int amount, double price) //funkcja do zapisania danych w tabeli
         {
             
             var con = new SQLiteConnection(path);
@@ -36,7 +35,7 @@ namespace magazyn
             cmd.ExecuteNonQuery();
               
         }
-        public SQLiteDataReader ReadDB()
+        public SQLiteDataReader ReadDB() //funkcja do odczytania danych z tabeli 
         {
             var con = new SQLiteConnection(@"URI=file:" + Application.StartupPath + "\\SuppliesDB.db");
             con.Open();
@@ -47,7 +46,7 @@ namespace magazyn
 
             return dataReader;
         }
-        public SQLiteDataReader ReadDB(string query)
+        public SQLiteDataReader ReadDB(string query) //funkcja do odczytania danych z tabeli w podanej kategorii
         {
             var con = new SQLiteConnection(@"URI=file:" + Application.StartupPath + "\\SuppliesDB.db");
             con.Open();
@@ -58,7 +57,7 @@ namespace magazyn
 
             return dataReader;
         }
-        public void CreateDB()
+        public void CreateDB() //utworzenie bazy danych jesli nie istnieje
         {
             if (!System.IO.File.Exists("SuppliesDB.db"))
             {
@@ -75,7 +74,7 @@ namespace magazyn
                 }
             }
         }
-        public void DeleteFromDB(string id)
+        public void DeleteFromDB(string id) //usuwanie wybranego rekordu tabeli
         {
             
             var con = new SQLiteConnection(path);
@@ -93,7 +92,7 @@ namespace magazyn
             }
             
         }
-        public void EditFromDB(string name, string description, string category, int amount, double price,string id)
+        public void EditFromDB(string name, string description, string category, int amount, double price,string id) //edytowanie danego rekordu nowo podanymi wartosciami
         {
             
             var con = new SQLiteConnection(path);

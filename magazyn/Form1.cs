@@ -15,7 +15,7 @@ namespace magazyn
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)//utworzenie tabeli i wczytanie ich do dataGridView podczas uruchomienia aplikacji
         {
             menager.CreateDB();
             dataGridView.ColumnCount = 6;
@@ -28,7 +28,7 @@ namespace magazyn
             read();
         }
 
-        private void tbAmount_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbAmount_KeyPress(object sender, KeyPressEventArgs e) //sprawdanie czy do pola tbAmount wpisywane sa tylko liczby calkowite
         {
             if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
@@ -36,7 +36,7 @@ namespace magazyn
             }
         }
 
-        private void tbPrice_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbPrice_KeyPress(object sender, KeyPressEventArgs e) //sprawdanie czy do pola tbPrice wpisywane sa tylko liczby calkowite lub z przecinkiem
         {
 
             if (tbPrice.Text.Length == 8 && e.KeyChar == ',' || tbPrice.Text.Length==0&& e.KeyChar == ',')
@@ -56,7 +56,7 @@ namespace magazyn
             else e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
-        private void add_Click(object sender, EventArgs e)
+        private void add_Click(object sender, EventArgs e) //dodawanie rekordow do tabeli o podanych wartosciach
         {
 
             if (tbName.Text==string.Empty || tbDescription.Text == string.Empty || tbCategory.Text == string.Empty || tbAmount.Text == string.Empty || tbPrice.Text == string.Empty)
@@ -78,12 +78,12 @@ namespace magazyn
 
         }
 
-        private void show_Click(object sender, EventArgs e)
+        private void show_Click(object sender, EventArgs e) //wyswietlenie rekordow tabeli
         {
             read();
         }
 
-        private void edit_Click(object sender, EventArgs e)
+        private void edit_Click(object sender, EventArgs e) //edytacja danego rekordu o podane wartosci
         {
             
             if (tbName.Text == string.Empty || tbDescription.Text == string.Empty || tbCategory.Text == string.Empty || tbAmount.Text == string.Empty || tbPrice.Text == string.Empty)
@@ -106,14 +106,14 @@ namespace magazyn
 
         }
 
-        private void delete_Click(object sender, EventArgs e)
+        private void delete_Click(object sender, EventArgs e) //usuniecie danego rekordu
         {            
             menager.DeleteFromDB(getId());
 
             read();
 
         }
-        public void read()
+        public void read() // funkcja do wprowadzenie dancy z bazy do dataGridView
         {
             dataGridView.Rows.Clear();
             var dr = menager.ReadDB();
@@ -128,14 +128,14 @@ namespace magazyn
                 dataGridView.Rows.Insert(0, dr.GetInt16(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetInt16(4), dr.GetDouble(5));
             }
         }
-        public string getId()
-        {
+        public string getId() //funkcja do pobrania wartosci id wybranego rekordu
+        {   //TODO pobieranie wartosci id po wybarniu dowolnej komorki rekordu
             int rowindex = dataGridView.CurrentCell.RowIndex;
             int columnindex = dataGridView.CurrentCell.ColumnIndex;
             string id;
             return id = dataGridView.Rows[rowindex].Cells[columnindex].Value.ToString();
         }
-        public void clear()
+        public void clear() // funkcja do czyszczenia textBoxow z podanych wartosci
         {
             tbName.Clear();
             tbDescription.Clear();
