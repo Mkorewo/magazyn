@@ -19,7 +19,6 @@ namespace magazyn
         SQLiteDataReader dataReader;
         public void WriteDB(string name, string description, string category, int amount, double price)
         {
-            //string query = "INSERT INTO supplies VALUES(null,'" + name + "','" + description + "','" + category + "'," + amount + "," + price+");";
             
             var con = new SQLiteConnection(path);
             con.Open();
@@ -75,6 +74,43 @@ namespace magazyn
                 }
             }
         }
+        public void DeleteFromDB(string id)
+        {
+            //TODO dodac funkcjonalnosc
+            var con = new SQLiteConnection(path);
+            con.Open();
+            var cmd = new SQLiteCommand(con);
+            cmd.CommandText = "DELETE FROM supplies WHERE Id='"+id+"';";
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (InvalidCastException e)
+            {
+                MessageBox.Show("err");
+            }
+            
+        }
+        public void EditFromDB(string name, string description, string category, int amount, double price,string id)
+        {
+            //TODO dodac funkcjonalnosc
+            var con = new SQLiteConnection(path);
+            con.Open();
+            var cmd = new SQLiteCommand(con);
+            cmd.CommandText = "UPDATE supplies SET Name ='"+name+"', Description = '"+description+"', Category = '"+category+"' , Amount = "+amount+", Price = "+price+" WHERE Id = "+id+";";
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (InvalidCastException e)
+            {
+                MessageBox.Show("err");
+            }
+
+        }
 
     }
 }
+//UPDATE table_name SET column1 = value1, column2 = value2, ...WHERE condition;

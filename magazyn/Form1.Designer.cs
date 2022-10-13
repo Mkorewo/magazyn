@@ -43,6 +43,8 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.inputCategory = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.edit = new System.Windows.Forms.Button();
+            this.delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,7 +157,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 29;
-            this.dataGridView.Size = new System.Drawing.Size(907, 324);
+            this.dataGridView.Size = new System.Drawing.Size(823, 324);
             this.dataGridView.TabIndex = 12;
             // 
             // inputCategory
@@ -174,11 +176,33 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "kategoria*";
             // 
+            // edit
+            // 
+            this.edit.Location = new System.Drawing.Point(90, 331);
+            this.edit.Name = "edit";
+            this.edit.Size = new System.Drawing.Size(94, 29);
+            this.edit.TabIndex = 15;
+            this.edit.Text = "edytuj";
+            this.edit.UseVisualStyleBackColor = true;
+            this.edit.Click += new System.EventHandler(this.edit_Click);
+            // 
+            // delete
+            // 
+            this.delete.Location = new System.Drawing.Point(90, 366);
+            this.delete.Name = "delete";
+            this.delete.Size = new System.Drawing.Size(94, 29);
+            this.delete.TabIndex = 16;
+            this.delete.Text = "usuń";
+            this.delete.UseVisualStyleBackColor = true;
+            this.delete.Click += new System.EventHandler(this.delete_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1324, 450);
+            this.ClientSize = new System.Drawing.Size(1237, 450);
+            this.Controls.Add(this.delete);
+            this.Controls.Add(this.edit);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.inputCategory);
             this.Controls.Add(this.dataGridView);
@@ -220,5 +244,7 @@
         private DataGridView dataGridView;
         private TextBox inputCategory;
         private Label label6;
+        private Button edit;
+        private Button delete;
     }
 }
