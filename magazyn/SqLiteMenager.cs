@@ -51,7 +51,7 @@ namespace magazyn
             var con = new SQLiteConnection(@"URI=file:" + Application.StartupPath + "\\SuppliesDB.db");
             con.Open();
 
-            string stm = "SELECT * FROM supplies WHERE category = '" + query + "'";
+            string stm = "SELECT * FROM supplies WHERE category = '" + query + "';";
             var cmd = new SQLiteCommand(stm, con);
             dataReader = cmd.ExecuteReader();
 
@@ -80,7 +80,7 @@ namespace magazyn
             var con = new SQLiteConnection(path);
             con.Open();
             var cmd = new SQLiteCommand(con);
-            cmd.CommandText = "DELETE FROM supplies WHERE Id='"+id+"';";
+            cmd.CommandText = "DELETE FROM supplies WHERE id='"+id+"';";
 
             try
             {
@@ -92,21 +92,45 @@ namespace magazyn
             }
             
         }
-        public void EditFromDB(string name, string description, string category, int amount, double price,string id) //edytowanie danego rekordu nowo podanymi wartosciami
+        public void EditFromDB(string name, string description, string category, int amount, double price, string id) //edytowanie danego rekordu nowo podanymi wartosciami
         {
-            
+
             var con = new SQLiteConnection(path);
             con.Open();
-            var cmd = new SQLiteCommand(con);
-            cmd.CommandText = "UPDATE supplies SET Name ='"+name+"', Description = '"+description+"', Category = '"+category+"' , Amount = "+amount+", Price = "+price+" WHERE Id = "+id+";";
+            var cmd1 = new SQLiteCommand(con);
+            //
+            string stm = "SELECT * FROM supplies WHERE id = '" + id + "'";
+            var cmd2 = new SQLiteCommand(stm, con);
+            var dr = cmd2.ExecuteReader();
+            //
+            while (dr.Read())
+            { 
+                if (dr.GetString(1) != name)
+                {
+                    cmd1.CommandText = "UPDATE supplies SET Name ='" + name +"' WHERE Id = " + id + ";";
+                    cmd1.ExecuteNonQuery();
+                }
+                if (dr.GetString(2) != description)
+                {
+                    cmd1.CommandText = "UPDATE supplies SET Description ='" + description + "' WHERE Id = " + id + ";";
+                    cmd1.ExecuteNonQuery();
+                }
+                if(dr.GetString(3) != category)
+                {
+                    cmd1.CommandText = "UPDATE supplies SET Category ='" + category + "' WHERE Id = " + id + ";";
+                    cmd1.ExecuteNonQuery();
+                }
+                if(dr.GetInt16(4) != amount)
+                {
+                    cmd1.CommandText = "UPDATE supplies SET Amount ='" + amount + "' WHERE Id = " + id + ";";
+                    cmd1.ExecuteNonQuery();
+                }
+                if(dr.GetDouble(5) != price)
+                {
+                    cmd1.CommandText = "UPDATE supplies SET Price ='" + price + "' WHERE Id = " + id + ";";
+                    cmd1.ExecuteNonQuery();
+                }
 
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (InvalidCastException e)
-            {
-                MessageBox.Show("err");
             }
 
         }

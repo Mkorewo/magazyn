@@ -96,6 +96,7 @@
             // tbName
             // 
             this.tbName.Location = new System.Drawing.Point(123, 108);
+            this.tbName.MaxLength = 30;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(125, 27);
             this.tbName.TabIndex = 5;
@@ -103,6 +104,7 @@
             // tbDescription
             // 
             this.tbDescription.Location = new System.Drawing.Point(123, 141);
+            this.tbDescription.MaxLength = 60;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(125, 27);
             this.tbDescription.TabIndex = 6;
@@ -110,6 +112,7 @@
             // tbCategory
             // 
             this.tbCategory.Location = new System.Drawing.Point(123, 174);
+            this.tbCategory.MaxLength = 40;
             this.tbCategory.Name = "tbCategory";
             this.tbCategory.Size = new System.Drawing.Size(125, 27);
             this.tbCategory.TabIndex = 7;
@@ -144,27 +147,34 @@
             // 
             // show
             // 
-            this.show.Location = new System.Drawing.Point(800, 382);
+            this.show.Location = new System.Drawing.Point(1329, 87);
             this.show.Name = "show";
-            this.show.Size = new System.Drawing.Size(94, 29);
+            this.show.Size = new System.Drawing.Size(61, 29);
             this.show.TabIndex = 11;
-            this.show.Text = "wyświetl";
+            this.show.Text = "szukaj";
             this.show.UseVisualStyleBackColor = true;
             this.show.Click += new System.EventHandler(this.show_Click);
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(386, 31);
+            this.dataGridView.Location = new System.Drawing.Point(385, 122);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 29;
-            this.dataGridView.Size = new System.Drawing.Size(823, 324);
+            this.dataGridView.Size = new System.Drawing.Size(1005, 371);
             this.dataGridView.TabIndex = 12;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
+            this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             // 
             // inputCategory
             // 
-            this.inputCategory.Location = new System.Drawing.Point(669, 384);
+            this.inputCategory.Location = new System.Drawing.Point(1198, 87);
             this.inputCategory.Name = "inputCategory";
             this.inputCategory.Size = new System.Drawing.Size(125, 27);
             this.inputCategory.TabIndex = 13;
@@ -172,11 +182,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(585, 387);
+            this.label6.Location = new System.Drawing.Point(1055, 90);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 20);
+            this.label6.Size = new System.Drawing.Size(137, 20);
             this.label6.TabIndex = 14;
-            this.label6.Text = "kategoria*";
+            this.label6.Text = "szukaj po kategorii:";
             // 
             // edit
             // 
@@ -202,7 +212,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1237, 450);
+            this.ClientSize = new System.Drawing.Size(1481, 559);
             this.Controls.Add(this.delete);
             this.Controls.Add(this.edit);
             this.Controls.Add(this.label6);

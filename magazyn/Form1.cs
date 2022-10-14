@@ -10,6 +10,7 @@ namespace magazyn
     public partial class Form1 : Form
     {
         SqLiteMenager menager=new SqLiteMenager();
+        string idCellValue;
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +26,9 @@ namespace magazyn
             dataGridView.Columns[3].Name = "category";
             dataGridView.Columns[4].Name = "amount";
             dataGridView.Columns[5].Name = "price";
+            dataGridView.Columns[2].Width = 327;
+            dataGridView.RowTemplate.Height = 40;
+            
             read();
         }
 
@@ -98,7 +102,7 @@ namespace magazyn
                 int amount = Convert.ToInt32(tbAmount.Text);
                 double price = Convert.ToDouble(tbPrice.Text);
 
-                menager.EditFromDB(name, description, category, amount, price,getId());
+                menager.EditFromDB(name, description, category, amount, price,idCellValue);
                 read();
                 clear();
 
@@ -108,11 +112,21 @@ namespace magazyn
 
         private void delete_Click(object sender, EventArgs e) //usuniecie danego rekordu
         {            
-            menager.DeleteFromDB(getId());
+            menager.DeleteFromDB(idCellValue);
 
             read();
 
         }
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView.CurrentRow.Selected = true;
+            tbName.Text = dataGridView.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
+            tbDescription.Text = dataGridView.Rows[e.RowIndex].Cells["Description"].FormattedValue.ToString();
+            tbCategory.Text = dataGridView.Rows[e.RowIndex].Cells["Category"].FormattedValue.ToString();
+            tbAmount.Text = dataGridView.Rows[e.RowIndex].Cells["Amount"].FormattedValue.ToString();
+            tbPrice.Text = dataGridView.Rows[e.RowIndex].Cells["Price"].FormattedValue.ToString();
+        }
+
         public void read() // funkcja do wprowadzenie dancy z bazy do dataGridView
         {
             dataGridView.Rows.Clear();
@@ -128,13 +142,6 @@ namespace magazyn
                 dataGridView.Rows.Insert(0, dr.GetInt16(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetInt16(4), dr.GetDouble(5));
             }
         }
-        public string getId() //funkcja do pobrania wartosci id wybranego rekordu
-        {   //TODO pobieranie wartosci id po wybarniu dowolnej komorki rekordu
-            int rowindex = dataGridView.CurrentCell.RowIndex;
-            int columnindex = dataGridView.CurrentCell.ColumnIndex;
-            string id;
-            return id = dataGridView.Rows[rowindex].Cells[columnindex].Value.ToString();
-        }
         public void clear() // funkcja do czyszczenia textBoxow z podanych wartosci
         {
             tbName.Clear();
@@ -142,6 +149,17 @@ namespace magazyn
             tbCategory.Clear();
             tbAmount.Clear();
             tbPrice.Clear();
+        }
+
+        private void dataGridView_SelectionChanged(object sender, EventArgs e) //funkcja do pobrania wartosci id wybranego rekordu
+        {
+            if (dataGridView.SelectedCells.Count > 0)
+            {
+                int selectedrowindex = dataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dataGridView.Rows[selectedrowindex];
+                idCellValue = Convert.ToString(selectedRow.Cells["id"].Value);
+                
+            }
         }
     }
 }
