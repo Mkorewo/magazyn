@@ -117,14 +117,21 @@ namespace magazyn
             read();
 
         }
-        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e) //wpisanie wartosci z wybranego rzedu do textboxow
         {
             dataGridView.CurrentRow.Selected = true;
-            tbName.Text = dataGridView.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
-            tbDescription.Text = dataGridView.Rows[e.RowIndex].Cells["Description"].FormattedValue.ToString();
-            tbCategory.Text = dataGridView.Rows[e.RowIndex].Cells["Category"].FormattedValue.ToString();
-            tbAmount.Text = dataGridView.Rows[e.RowIndex].Cells["Amount"].FormattedValue.ToString();
-            tbPrice.Text = dataGridView.Rows[e.RowIndex].Cells["Price"].FormattedValue.ToString();
+            try
+            {
+                tbName.Text = dataGridView.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
+                tbDescription.Text = dataGridView.Rows[e.RowIndex].Cells["Description"].FormattedValue.ToString();
+                tbCategory.Text = dataGridView.Rows[e.RowIndex].Cells["Category"].FormattedValue.ToString();
+                tbAmount.Text = dataGridView.Rows[e.RowIndex].Cells["Amount"].FormattedValue.ToString();
+                tbPrice.Text = dataGridView.Rows[e.RowIndex].Cells["Price"].FormattedValue.ToString();
+            }
+            catch
+            {
+
+            }
         }
 
         public void read() // funkcja do wprowadzenie dancy z bazy do dataGridView
